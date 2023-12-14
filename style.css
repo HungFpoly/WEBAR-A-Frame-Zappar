@@ -1,0 +1,59 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    text-align: center;
+    overflow: hidden;
+}
+img {
+    width: 100%;
+    height: 100%;
+}
+.ui-element {
+    position: absolute;
+}
+#zappar-placement-ui, #zappar-replacement-ui, #cancelUi {
+    background: rgba(52,36,75, 0.8);
+    background: linear-gradient(90deg, rgba(52,36,75,1) 0%, rgba(57,67,108,1) 100%);
+    border-radius: 5px;
+    border: 2px solid #a6d5db;
+    color: white;
+}
+#zappar-replacement-ui, #cancelUi {
+    padding: 0.8em 1.2em 0.7em;
+    top: 0;
+}
+#zappar-placement-ui {
+    bottom: 30px;
+    width: 200px;
+    left: calc(50% - 100px);
+    padding: 10px;
+}
+#zappar-replacement-ui {
+    left: 0;
+}
+#facts {
+    bottom: 30vh;
+}
+#sunInfo, #earthInfo {
+    width: 100vw;
+}
+#earthInfo {
+    top: 2.5vh;
+}
+#cancelUi {
+    right: 0;
+}
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .2s linear;
+}
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 2s, opacity .2s linear;
+}
