@@ -1,99 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://libs.zappar.com/zappar-aframe/2.0.0/zappar-aframe.js"></script>
-    <!-- a-frame-look-at-component for billboarding: https://github.com/supermedium/superframe/tree/master/components/look-at/ -->
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <!-- Feather - Open source icons: https://feathericons.com -->
-    <script src="https://unpkg.com/feather-icons"></script>
-
-    <link rel="stylesheet" href="style.css" />
 
     <meta charset="utf-8" />
-    <title>Zappar for A-Frame: Instant Tracking Billboard Example</title>
-    <!-- Add our components before the scene so they can initialise in time -->
-    <script src="components.js"></script>
+    <title>Zappar for A-Frame: Instant Tracking 3D Model Example</title>
 </head>
+
 <body>
-    <a-scene loading-screen="backgroundColor: #344b60">
-        <!-- Ask user for camera permissions, display some text if permission is denied -->
-        <a-entity zappar-permissions-ui id="permissions"></a-entity>
-        <!-- shows a full-page dialog that informs the user they're using an unsupported browser -->
-        <a-entity zappar-compatibility-ui id="compatibility"></a-entity>
-
-        <!-- Asset Library -->
-        <a-assets>
-            <!-- All planet textures - from shadedrelief http://www.shadedrelief.com/natural3/index.html
-            & solarsystemscope https://www.solarsystemscope.com/textures/) -->
-            <img id="sunTexture" src="assets/Sun/Sun_Texture.jpg" />
-            <img id="earthTexture" src="assets/Earth/Earth_Texture.jpg" />
-            <!-- Platform texture -->
-            <img id="baseTexture" src="assets/Universe-Platform.png" />
-            <!-- Information icon texture -->
-            <img id="infoIcon" src="assets/Info-Icon.png" />
-        </a-assets>
-
-        <!-- Mixins -->
-        <!-- Rotate the planets -->
-        <a-mixin id="rotate" animation="property: rotation; loop: true; from: 0 0 0; to: 0 360 0; dur: 20000; easing: linear;"></a-mixin>
-        <!-- Make the Earth Orbit -->
-        <a-mixin id="orbit" animation="property: rotation; loop: true; to: 0 360 0; dur: 14000; easing: linear;"></a-mixin>
-        <!-- Make the information icons pulse -->
-        <a-mixin id="pulse" animation="property: scale; loop:true; to: 0.8 0.8 0.8; dir: alternate; dur: 700; easing: easeInQuad;"></a-mixin>
-
-        <!-- Add a zappar-camera component for tracking -->
-        <a-camera id="camera" zappar-camera cursor="rayOrigin: mouse; fuse: false;" raycaster="objects: .interactive" />
-
-        <!-- Ambient lighting -->
-        <a-entity light="type: ambient; color: #CCC"></a-entity>
-
-        <!-- Setup our instant tracker and start it in placement mode so the user can -->
-        <!-- choose a location for the object -->
-        <a-entity zappar-instant="placement-mode: true" id="instant-group">
-            <!-- Sun Group -->
-            <a-entity id="sun" position="0 0.5 0">
-                <!-- Sun geometry -->
-                <a-sphere radius="0.9" material="src: #sunTexture; emissive: #ffaf46; emissiveIntensity: .5" light="type: point; color: #ffaf46; intensity: 1.5" mixin="rotate"></a-sphere>
-                <!-- Sun information icon -->
-                <a-image id="sunInfoIcon" class="interactive" src="#infoIcon" look-at="[zappar-camera]" material="alpha-test:0.5" position="0 1.2 0" scale="0.5 0.5 0.5" rotation="Math.PI * 0.5, 0, 0" mixin="pulse"></a-image>
-            </a-entity>
-            <!-- Earth Group -->
-            <a-entity id="earth" mixin="orbit" animation="dur: 10000;">
-                <!-- Earth geometry -->
-                <a-sphere position="0 0.5 2.2" radius="0.2" material="src: #earthTexture;" mixin="rotate">
-                    <!-- Earth information icon (inside the geometry so we know it will follow the shape) -->
-                    <a-image id="earthInfoIcon" class="interactive" look-at="[zappar-camera]" src="#infoIcon" material="alpha-test:0.5" position="0 0.5 0" scale="0.5 0.5 0.5" rotation="Math.PI * 0.5, 0, 0" mixin="pulse"></a-image>
-                </a-sphere>
-            </a-entity>
-            <!-- Base texture -->
-            <a-plane material="src: #baseTexture; side: double" position="0 -0.5 0" scale="5 5 5" rotation="-85 0 0" opacity="0.8"></a-plane>
+    <a-scene>
+        <a-entity camera zappar-camera></a-entity>
+        <a-entity zappar-instant="placement-mode: true;" id="my-instant-tracker">
+            <a-entity gltf-model="assets/bird_orange.glb"></a-entity>
         </a-entity>
+        <script>
+            let myInstantTracker = document.getElementById("my-instant-tracker");
+            document.body.addEventListener("click", () => {
+                myInstantTracker.setAttribute("zappar-instant", "placement-mode: false;");
+            })
+        </script>
     </a-scene>
-
-    <!-- Some UI for the user to tap to indicate they're happy with the placement -->
-    <div id="zappar-placement-ui" class="ui-element visible">Tap here to place the object</div>
-
-    <!-- Some UI for the user to tap to indicate they want to manipulate the placement -->
-    <div id="zappar-replacement-ui" class="ui-element hidden"><i data-feather="move"></i></div>
-
-     <!-- Some UI for the user to view interesting facts -->
-     <div id="facts" class="ui-element">
-        <!-- Sun information box -->
-        <div id="sunInfo" class="ui-element hidden">
-            <img src="assets/Sun-Info.png" alt="The Sun is at the center of the Solar System.">
-        </div>
-        <!-- Earth information box -->
-        <div id="earthInfo" class="ui-element hidden">
-            <img src="assets/Earth-Info.png" alt="Earth is the third planet from the Sun and the only object in the Universe know to harbor.">
-        </div>
-    </div>
-
-    <!-- Some UI for the user to tap to indicate they want to remove the information box -->
-    <div id="cancelUi" class="ui-element hidden"><i data-feather="x"></i></div>
-
-    <!-- Index script file -->
-    <script src="index.js"></script>
-
 </body>
+
 </html>
