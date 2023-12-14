@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import * as ZapparThree from '@zappar/zappar-threejs';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 // Medieval Mug - HCardoso |  License: CC Attribution | https://sketchfab.com/3d-models/medieval-mug-b2d21e561b804557b7f713555bb638c2
-const model = new URL('../assets/mug.glb', import.meta.url).href;
+const model = new URL('/assets/mug.glb', import.meta.url).href;
 
 import './index.css';
 // The SDK is supported on many different browsers, but there are some that
