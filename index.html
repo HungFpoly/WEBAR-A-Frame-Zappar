@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBAR</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://libs.zappar.com/zappar-aframe/0.3.9/zappar-aframe.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-entity camera zappar-camera>
+            <a-entity zappar-instant="placement-mode: true;" id="my-instant-tracker">
+                <a-entity gltf-model="model/bird_orange.glb"></a-entity>
+            </a-entity>
+            <script>
+                let myInstantTracker = document.getElementById("my-instant-tracker");
+                document.body.addEventListener("click", () => {
+                    myInstantTracker.setAttribute("zappar-instant", "placement-mode: false;");
+                })
+            </script>
+        </a-entity>
+    </a-scene>
+</body>
+
+</html>
