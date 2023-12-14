@@ -11,17 +11,16 @@
 
 <body>
     <a-scene>
-        <a-entity camera zappar-camera>
-            <a-entity zappar-instant="placement-mode: true;" id="my-instant-tracker">
-                <a-entity gltf-model="model/bird_orange.glb"></a-entity>
-            </a-entity>
-            <script>
-                let myInstantTracker = document.getElementById("my-instant-tracker");
-                document.body.addEventListener("click", () => {
-                    myInstantTracker.setAttribute("zappar-instant", "placement-mode: false;");
-                })
-            </script>
+        <a-entity camera zappar-camera></a-entity>
+        <a-entity zappar-instant="placement-mode: true;" id="my-instant-tracker">
+            <a-entity gltf-model="model/bird_orange.glb"></a-entity>
         </a-entity>
+        <script>
+            let myInstantTracker = document.getElementById("my-instant-tracker");
+            document.body.addEventListener("click", () => {
+                myInstantTracker.setAttribute("zappar-instant", "placement-mode: false;");
+            })
+        </script>
     </a-scene>
 </body>
 
