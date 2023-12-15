@@ -12,12 +12,6 @@
 <body>
     <a-scene>
         <a-entity camera zappar-camera></a-entity>
-        <!-- Ask user for camera permissions, display some text if permission is denied -->
-        <a-entity zappar-permissions-ui id="permissions">
-            <!-- Remove the text entity to use Zappar's default permission denied UI -->
-            <a-entity text="value: Please reload the page, accepting the camera permissions."
-                position="0 0 -2"></a-entity>
-        </a-entity>
         <a-entity zappar-instant="placement-mode: true;" id="my-instant-tracker">
             <a-entity gltf-model="url(model/bird_orange.glb)" scale="3 3 3" shadow="cast: true"></a-entity>
         </a-entity>
